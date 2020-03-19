@@ -19,6 +19,7 @@ import com.mongodb.stitch.android.core.auth.StitchUser;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteFindIterable;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
+import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCursor;
 import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
 import com.mongodb.stitch.core.services.mongodb.remote.RemoteUpdateOptions;
 import com.mongodb.stitch.core.services.mongodb.remote.RemoteUpdateResult;
@@ -29,6 +30,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
+
 
 public class ConnectToDB {
 
@@ -47,51 +49,12 @@ public class ConnectToDB {
         final RemoteMongoCollection<Document> coll =
                 mongoClient.getDatabase("test").getCollection("Artists");
 
-        client.getAuth().loginWithCredential(new AnonymousCredential()).continueWithTask(
-                new Continuation<StitchUser, Task<RemoteUpdateResult>>() {
-
-                    @Override
-                    public Task<RemoteUpdateResult> then(@NonNull Task<StitchUser> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            Log.e("STITCH", "Login failed!");
-                            throw task.getException();
-                        }
-
-                        final Document updateDoc = new Document(
-                                "owner_id",
-                                task.getResult().getId()
-                        );
-
-                        updateDoc.put("number", 42);
-                        return coll.updateOne(
-                                null, updateDoc, new RemoteUpdateOptions().upsert(true)
-                        );
-                    }
-                }
-        ).continueWithTask(new Continuation<RemoteUpdateResult, Task<List<Document>>>() {
-            @Override
-            public Task<List<Document>> then(@NonNull Task<RemoteUpdateResult> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    Log.e("STITCH", "Update failed!");
-                    throw task.getException();
-                }
-                List<Document> docs = new ArrayList<>();
-                return coll
-                        .find(new Document("owner_id", client.getAuth().getUser().getId()))
-                        .limit(100)
-                        .into(docs);
-            }
-        }).addOnCompleteListener(new OnCompleteListener<List<Document>>() {
-            @Override
-            public void onComplete(@NonNull Task<List<Document>> task) {
-                if (task.isSuccessful()) {
-                    Log.d("STITCH", "Found docs: " + task.getResult().toString());
-                    return;
-                }
-                Log.e("STITCH", "Error: " + task.getException().toString());
-                task.getException().printStackTrace();
-            }
+        coll.find().forEach(document -> {
+            Artist artist = new Artist(document.get("Username").toString(), document.get("Gender").toString(), document.get("Type").toString());
+            System.out.println(artist.username);
+            artists.put(artist.username, artist);
         });
 
+        System.out.println(ConnectToDB.artists.keySet());
     }
 }

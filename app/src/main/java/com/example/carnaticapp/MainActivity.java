@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         myList.add("saxophone");
         myList.add("violinist");
 
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, myList);
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>(ConnectToDB.artists.keySet()));
         listView.setAdapter(arrayAdapter);
 
       /* FloatingActionButton fab = findViewById(R.id.fab);
