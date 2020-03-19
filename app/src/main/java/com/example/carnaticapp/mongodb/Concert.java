@@ -1,6 +1,5 @@
 package com.example.carnaticapp.mongodb;
 
-import android.icu.text.DateIntervalInfo;
 import android.icu.util.DateInterval;
 
 public class Concert {

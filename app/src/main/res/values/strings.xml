@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">CarnaticApp</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Carnatic App</string>
+    <string name="action_settings">Search</string>
 </resources>
