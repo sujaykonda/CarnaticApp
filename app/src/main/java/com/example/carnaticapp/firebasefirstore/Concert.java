@@ -1,4 +1,4 @@
-package com.example.carnaticapp.mongodb;
+package com.example.carnaticapp.firebasefirstore;
 
 import android.icu.util.DateInterval;
 

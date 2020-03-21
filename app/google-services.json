@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "642656788920",
+    "firebase_url": "https://carmatic-20c51.firebaseio.com",
+    "project_id": "carmatic-20c51",
+    "storage_bucket": "carmatic-20c51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642656788920:android:868d22ddcd38f22968af4d",
+        "android_client_info": {
+          "package_name": "com.example.carmatic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642656788920-431lcpkqmo3vfttjbjsnl2ovlcccusoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAh5DAFwsIyyAVj3J1wbdmoqQUYnhnQSVY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642656788920-431lcpkqmo3vfttjbjsnl2ovlcccusoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642656788920:android:73c6eb0a80ca4a4468af4d",
+        "android_client_info": {
+          "package_name": "com.example.carnaticapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642656788920-jillpm9cv2f9f3skrdisho81a2l7hgqu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.carnaticapp",
+            "certificate_hash": "ffe492820b4d58fa61a95b063fb99e11130efbc6"
+          }
+        },
+        {
+          "client_id": "642656788920-431lcpkqmo3vfttjbjsnl2ovlcccusoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAh5DAFwsIyyAVj3J1wbdmoqQUYnhnQSVY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642656788920-431lcpkqmo3vfttjbjsnl2ovlcccusoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
