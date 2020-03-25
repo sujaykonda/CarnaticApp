@@ -1,4 +1,4 @@
-package com.example.carnaticapp;
+package com.example.carnaticapp.ui.auth;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.carnaticapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;

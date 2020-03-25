@@ -1,4 +1,4 @@
-package com.example.carnaticapp;
+package com.example.carnaticapp.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.carnaticapp.MainActivity;
+import com.example.carnaticapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -77,6 +79,10 @@ public class GoogleSignInActivity extends BaseActivity implements
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+        if (currentUser != null) {
+            Intent activityIntent = new Intent(this, MainActivity.class).putExtra("userId", currentUser.getUid());
+            startActivity(activityIntent);
+        }
     }
     // [END on_start_check_user]
 

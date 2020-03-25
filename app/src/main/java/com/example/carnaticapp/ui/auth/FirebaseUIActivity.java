@@ -1,4 +1,4 @@
-package com.example.carnaticapp;
+package com.example.carnaticapp.ui.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +7,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.carnaticapp.BuildConfig;
+import com.example.carnaticapp.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

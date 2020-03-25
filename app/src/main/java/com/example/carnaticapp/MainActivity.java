@@ -9,10 +9,12 @@ import android.os.Bundle;
 import com.example.carnaticapp.firebasefirstore.Artist;
 import com.example.carnaticapp.firebasefirstore.Concert;
 import com.example.carnaticapp.firebasefirstore.ConnectToDB;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -31,7 +33,6 @@ import androidx.navigation.ui.NavigationUI;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import android.widget.SearchView;
@@ -39,18 +40,19 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
-   // ArrayAdapter<String> arrayAdapter;
+    private String userId;
     final ConnectToDB connection = new ConnectToDB();
     static HashMap<String, Artist> artists = new HashMap<>();
     static HashMap<String, Concert> concerts = new HashMap<>();
     ListView listView;
- //   private ArrayList<Artist> mArtistsList;
     ArtistsAdapter mArtistAdapter;
+    private Artist artist;
 
     @Override
     protected void onStart() {
@@ -78,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent sendToMain = getIntent();
+        userId = sendToMain.getStringExtra("userId");
         if(Build.VERSION.SDK_INT >= 23){
             if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED){
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
@@ -120,16 +124,14 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Artist artist = document.toObject(Artist.class);
-                                    System.out.println(artist.getUsername());
-                                    artists.put(artist.getUsername(), artist);
+                                    Artist nextArtist = document.toObject(Artist.class);
+                                    System.out.println(nextArtist.getUserId());
+                                    artists.put(nextArtist.getUserId(), nextArtist);
                                 }
                                 mArtistAdapter.addAll(new ArrayList<>(artists.values()));
                                 mArtistAdapter.notifyDataSetChanged();
-
                                 System.out.println(" Notified data changed");
-
-
+                                setArtist();
                             } else {
                                 Log.w(TAG, "Error getting documents.", task.getException());
                             }
@@ -152,23 +154,48 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+        }
 
+    public void setArtist() {
+        if(artists.containsKey(userId)){
+            artist = artists.get(userId);
+        }else{
+            artist = new Artist(userId);
+            Map<String, Object> newArtist = new HashMap<>();
+            newArtist.put("firstName", null);
+            newArtist.put("lastName", null);
+            newArtist.put("gender", null);
+            newArtist.put("category", null);
+            newArtist.put("teacherName", null);
+            newArtist.put("schoolName", null);
+            newArtist.put("userId", userId);
 
-      /*  List<String> myList = new ArrayList<>();
-        myList.add("saxophone");
-        myList.add("violinist");*/
+            // Add a new document with a generated ID
+            connection.getDBInstance().collection("Artists")
+                    .add(newArtist)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            sendToNewProfile(artist.getUserId());
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding document", e);
+                        }
+                    });
+        }
 
-
-
-      /* FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        }); */
     }
+    public void sendToNewProfile(String userId){
+        Intent activityIntent = new Intent(this, NewProfileActivity.class).putExtra("userId", userId);
+        startActivity(activityIntent);
+        Toast.makeText(MainActivity.this, "Welcome! Please set your Profile.", Toast.LENGTH_SHORT).show();
+    }
+
+
 
     public static HashMap<String, Artist> getArtists() {
         return artists;

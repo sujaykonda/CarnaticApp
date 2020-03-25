@@ -1,18 +1,11 @@
 package com.example.carnaticapp;
 
 import android.app.Activity;
-import android.app.Notification;
 import android.content.Context;
-import android.graphics.Paint;
-import android.graphics.PathDashPathEffect;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
-import android.widget.Space;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,9 +37,9 @@ public class ArtistsAdapter extends ArrayAdapter<Artist> {
 
             Artist artist = getItem(position);
 
-            nameView.setText(artist.getUsername()+"    ");
+            nameView.setText(artist.getFirstName()+"    ");
             genderView.setText(artist.getGender()+"    ");
-            typeView.setText(artist.getType());
+            typeView.setText(artist.getCategory());
 
       /*  if(convertView == null){
             convertView =  ((Activity)getContext()).getLayoutInflater().inflate(R.layout.content_artist,parent,false);
@@ -89,13 +82,13 @@ public class ArtistsAdapter extends ArrayAdapter<Artist> {
                 int i=0;
                 while(i<length){
                     Artist artist=artists.get(i);
-                    if(artist.getUsername().startsWith(constraint.toString())) {
+                    if(artist.getFirstName().startsWith(constraint.toString())) {
                         tempList.add(artist);
                     }
                     else if(artist.getGender().startsWith(constraint.toString())) {
                         tempList.add(artist);
                     }
-                    else if(artist.getType().startsWith(constraint.toString())) {
+                    else if(artist.getCategory().startsWith(constraint.toString())) {
                         tempList.add(artist);
                     }
                     i++;

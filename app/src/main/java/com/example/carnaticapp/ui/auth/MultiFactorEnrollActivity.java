@@ -1,4 +1,4 @@
-package com.example.carnaticapp;
+package com.example.carnaticapp.ui.auth;
 
 import android.os.Bundle;
 
@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.carnaticapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

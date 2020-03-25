@@ -1,4 +1,4 @@
-package com.example.carnaticapp;
+package com.example.carnaticapp.ui.auth;
 
 import android.content.Context;
 import android.view.View;

@@ -18,7 +18,7 @@
             android:name=".bottom_navigation"
             android:label="@string/title_activity_bottom_navigation" />
         <activity
-            android:name=".ChooserActivity"
+            android:name=".ui.auth.ChooserActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -35,20 +35,27 @@
         </activity>
 
         <activity
-            android:name=".CustomAuthActivity"
+            android:name=".NewProfileActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity
+            android:name=".ui.auth.CustomAuthActivity"
             android:label="@string/label_custom_auth" />
         <activity
-            android:name=".GoogleSignInActivity"
+            android:name=".ui.auth.GoogleSignInActivity"
             android:label="@string/label_google_sign_in" />
         <activity
-            android:name=".FacebookLoginActivity"
+            android:name=".ui.auth.FacebookLoginActivity"
             android:label="@string/label_facebook_login" />
         <activity
-            android:name=".EmailPasswordActivity"
+            android:name=".ui.auth.EmailPasswordActivity"
             android:label="@string/label_emailpassword"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".PasswordlessActivity"
+            android:name=".ui.auth.PasswordlessActivity"
             android:label="@string/label_passwordless"
             android:launchMode="singleTop">
             <intent-filter>
@@ -61,29 +68,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PhoneAuthActivity"
+            android:name=".ui.auth.PhoneAuthActivity"
             android:label="@string/label_phone_auth"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".AnonymousAuthActivity"
+            android:name=".ui.auth.AnonymousAuthActivity"
             android:label="@string/label_anonymous_auth" />
         <activity
-            android:name=".FirebaseUIActivity"
+            android:name=".ui.auth.FirebaseUIActivity"
             android:label="@string/label_firebase_ui" />
         <activity
-            android:name=".GenericIdpActivity"
+            android:name=".ui.auth.GenericIdpActivity"
             android:label="@string/label_generic_idp" />
         <activity
-            android:name=".MultiFactorActivity"
+            android:name=".ui.auth.MultiFactorActivity"
             android:label="@string/label_multi_factor" />
         <activity
-            android:name=".MultiFactorEnrollActivity"
+            android:name=".ui.auth.MultiFactorEnrollActivity"
             android:label="MultiFactor Sign-In" />
         <activity
-            android:name=".MultiFactorSignInActivity"
+            android:name=".ui.auth.MultiFactorSignInActivity"
             android:label="MultiFactor Sign-In" />
         <activity
-            android:name=".MultiFactorUnenrollActivity"
+            android:name=".ui.auth.MultiFactorUnenrollActivity"
             android:label="MultiFactor Unenroll" />
         <!-- Facebook Configuration -->
         <meta-data

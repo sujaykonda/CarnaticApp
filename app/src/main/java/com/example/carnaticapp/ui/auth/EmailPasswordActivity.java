@@ -1,4 +1,4 @@
-package com.example.carnaticapp;
+package com.example.carnaticapp.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.carnaticapp.MainActivity;
+import com.example.carnaticapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -67,9 +69,15 @@ public class EmailPasswordActivity extends BaseActivity implements
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
-        Intent activityIntent = new Intent(this, MainActivity.class);
-        startActivity(activityIntent);
+//        Toast.makeText(EmailPasswordActivity.this, "Welcome " + currentUser.getDisplayName() + "! Please set your Profile.",
+//                Toast.LENGTH_SHORT).show();
+        if (currentUser != null) {
+            Intent activityIntent = new Intent(this, MainActivity.class).putExtra("userId", currentUser.getUid());
+            startActivity(activityIntent);
+        }
         finish();
+
+
     }
     // [END on_start_check_user]
 

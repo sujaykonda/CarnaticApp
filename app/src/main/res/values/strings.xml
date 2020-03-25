@@ -117,5 +117,13 @@
 
     <string name="error_sign_in_failed">Sign in failed, see logs for details.</string>
     <string name="multi_factor_signed_out">You are not signed in. To use this sample, first navigate to the Email/Password example to sign in and then return here to enroll in multi-factor auth.</string>
+    <string name="FirstName">First Name</string>
+    <string name="LastName">Last Name</string>
+    <string name="Category">Category</string>
+    <string name="Contact">Contact</string>
+    <string name="SchoolName">School Name</string>
+    <string name="Guru">Guru</string>
+    <string name="Save" />
+    <string name="SaveProfile">Save</string>
 
 </resources>
