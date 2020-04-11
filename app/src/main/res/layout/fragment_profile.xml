@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
-    <TextView
+  <!-- <TextView
         android:id="@+id/text_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,5 +18,65 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" /> -->
+
+    <LinearLayout
+        android:id="@+id/new_profile_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:textAlignment="textEnd"
+        android:theme="?attr/actionBarTheme" />
+
+        <EditText
+            android:labelFor="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:autofillHints=""
+            android:inputType="text" />
+        <EditText
+            android:labelFor="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:autofillHints=""
+            android:inputType="text" />
+        <EditText
+            android:id="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:autofillHints=""
+            android:inputType="text" />
+        <EditText
+            android:id="@+id/schoolName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:autofillHints=""
+            android:inputType="text" />
+        <EditText
+            android:id="@+id/Guru"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:autofillHints=""
+            android:inputType="text" />
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

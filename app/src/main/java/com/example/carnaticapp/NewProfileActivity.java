@@ -60,6 +60,9 @@ public class NewProfileActivity extends AppCompatActivity {
                         }
                     }
                 });
+        Intent intent = getIntent();
+        userId = intent.getStringExtra("userId");
+        setContentView(R.layout.activity_main);
     }
 
 

@@ -11,6 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.carnaticapp.firebasefirstore.Artist;
+import com.example.carnaticapp.firebasefirstore.ConnectToDB;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.w3c.dom.Document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +24,7 @@ import java.util.List;
 public class ArtistsAdapter extends ArrayAdapter<Artist> {
 
     List<Artist> artists;
+    final ConnectToDB connection = new ConnectToDB();
 
 
     public ArtistsAdapter(Context context, List<Artist> object){
@@ -73,43 +80,29 @@ public class ArtistsAdapter extends ArrayAdapter<Artist> {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults filterResults = new FilterResults();
-            ArrayList<Artist> tempList=new ArrayList<>();
+            List<Artist> tempList = new ArrayList<>();
             artists = new ArrayList<>(MainActivity.getArtists().values());
             //constraint is the result from text you want to filter against.
 
             if(constraint != null) {
-                int length=artists.size();
-                int i=0;
-                while(i<length){
-                    Artist artist=artists.get(i);
-                    if(artist.getFirstName().startsWith(constraint.toString())) {
-                        tempList.add(artist);
+                connection.getDBInstance().collection("Artists").whereGreaterThanOrEqualTo("firstName", constraint.toString())
+                        .whereLessThan("firstName", constraint.toString() + '\uf8ff')
+                        .get()
+                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        artists = queryDocumentSnapshots.toObjects(Artist.class);
+                        clear();
+                        addAll(artists);
+                        notifyDataSetChanged();
                     }
-                    else if(artist.getGender().startsWith(constraint.toString())) {
-                        tempList.add(artist);
-                    }
-                    else if(artist.getCategory().startsWith(constraint.toString())) {
-                        tempList.add(artist);
-                    }
-                    i++;
-                }
-                //following two lines is very important
-                //as publish result can only take FilterResults objects
-                filterResults.values = tempList;
-                filterResults.count = tempList.size();
+                });
             }
             return filterResults;
         }
 
-        @SuppressWarnings("unchecked")
         @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            artists = (ArrayList<Artist>) results.values;
-            System.out.println(" results :" + results);
-            clear();
-            addAll(artists);
-            notifyDataSetChanged();
-        }
+        protected void publishResults(CharSequence constraint, FilterResults results) { }
     };
     @NonNull
     @Override

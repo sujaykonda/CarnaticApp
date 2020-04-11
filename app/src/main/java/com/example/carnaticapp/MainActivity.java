@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.example.carnaticapp.firebasefirstore.Artist;
 import com.example.carnaticapp.firebasefirstore.Concert;
 import com.example.carnaticapp.firebasefirstore.ConnectToDB;
+import com.example.carnaticapp.ui.profile.ProfileFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     static HashMap<String, Concert> concerts = new HashMap<>();
     ListView listView;
     ArtistsAdapter mArtistAdapter;
-    private Artist artist;
+    public static Artist artist;
 
     @Override
     protected void onStart() {
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startLocService(){
         Intent intent = new Intent(MainActivity.this, LocationService.class);
+        System.out.println("Sujay :" + intent);
         startService(intent);
     }
 
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         }
-
     public void setArtist() {
         if(artists.containsKey(userId)){
             artist = artists.get(userId);
@@ -187,7 +189,16 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
         }
+        Bundle artistBundle = new Bundle();
+        artistBundle.putString("firstName", artist.getFirstName());
+        artistBundle.putString("lastName", artist.getLastName());
+        artistBundle.putString("category", artist.getCategory());
+        artistBundle.putString("contact", artist.getContact());
+        artistBundle.putString("schoolName", artist.getSchoolName());
+        artistBundle.putString("teacherName", artist.getTeacherName());
 
+        ProfileFragment profileFragment = new ProfileFragment();
+        profileFragment.setArguments(artistBundle);
     }
     public void sendToNewProfile(String userId){
         Intent activityIntent = new Intent(this, NewProfileActivity.class).putExtra("userId", userId);
